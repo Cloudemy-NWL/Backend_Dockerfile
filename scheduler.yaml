@@ -16,8 +16,11 @@ spec:
     spec:
       containers:
         - name: scheduler
-          image: withya61/cloudemy-scheduler:v4
+          image: withya61/cloudemy-scheduler:v3
           imagePullPolicy: Always
+          # 컨테이너 시작 시 python /app/scheduler.py 명령 실행
+          command: ["python"]
+          args: ["/app/scheduler.py"] 
           env:
             # Redis 큐 설정
             - name: REDIS_URL
@@ -29,7 +32,7 @@ spec:
             - name: K8S_NAMESPACE
               value: "default"
             - name: RUNNER_IMAGE
-              value: withya61/cloudemy-runner:v4
+              value: withya61/cloudemy-runner:v3
 
             # Runner 가 콜백을 보낼 Backend 주소
             - name: BACKEND_INTERNAL_URL
@@ -39,5 +42,3 @@ spec:
             # Secret 에서 LLM_API_KEY, INTERNAL_RESULT_TOKEN 가져옴
             - secretRef:
                 name: cloudemy-secret
-
-
