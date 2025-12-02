@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: scheduler
-          image: withya61/cloudemy-scheduler:v3
+          image: withya61/cloudemy-scheduler:v5
           imagePullPolicy: Always
           # 컨테이너 시작 시 python /app/scheduler.py 명령 실행
           command: ["python"]
@@ -36,7 +36,7 @@ spec:
 
             # Runner 가 콜백을 보낼 Backend 주소
             - name: BACKEND_INTERNAL_URL
-              value: "http://backend:8000/internal"
+              value: "http://backend:8000/api/internal"
 
           envFrom:
             # Secret 에서 LLM_API_KEY, INTERNAL_RESULT_TOKEN 가져옴
